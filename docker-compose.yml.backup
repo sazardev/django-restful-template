@@ -56,7 +56,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-
   # ============================================================================
   # DJANGO WEB - Main Application (HTTP + API)
   # ============================================================================
@@ -73,12 +72,13 @@ services:
       --worker-connections 1000
       --max-requests 1000
       --max-requests-jitter 50
-      --timeout 120
-      --keep-alive 5
-      --access-logfile /app/logs/gunicorn-access.log
-      --error-logfile /app/logs/gunicorn-error.log
-      --log-level info
-    volumes:
+          --timeout 30 \
+          --keep-alive 2 \
+          --log-level info \
+          --access-logfile /app/logs/gunicorn-access.log \
+          --error-logfile /app/logs/gunicorn-error.log \
+          --capture-output
+      "    volumes:
       - static_volume:/app/staticfiles
       - media_volume:/app/media
       - ./logs:/app/logs
@@ -86,6 +86,7 @@ services:
       - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-config.settings.base}
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
+      - LOAD_TEST_DATA=${LOAD_TEST_DATA:-false}
     env_file:
       - .env
     depends_on:
@@ -105,8 +106,7 @@ services:
 
   # ============================================================================
   # DJANGO WEBSOCKET - Real-time Communications (ASGI)
-  # ============================================================================
-  websocket:
+  # ============================================================================  websocket:
     build:
       context: .
       dockerfile: Dockerfile
@@ -117,7 +117,6 @@ services:
       --access-log /app/logs/daphne-access.log
       config.asgi:application
     volumes:
-      - media_volume:/app/media
       - ./logs:/app/logs
     environment:
       - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-config.settings.base}
@@ -134,7 +133,7 @@ services:
     networks:
       - logistics_network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8001/ws-health/"]
+      test: ["CMD", "curl", "-f", "http://localhost:8001/ws/health/"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -180,9 +179,9 @@ services:
                -c 'random_page_cost=1.1'
                -c 'temp_file_limit=2GB'
                -c 'log_min_duration_statement=1000'
-               -c 'log_connections=on'
-               -c 'log_disconnections=on'
-               -c 'log_lock_waits=on'
+               -c 'idle_in_transaction_session_timeout=10min'
+               -c 'lock_timeout=1min'
+               -c 'statement_timeout=10min'
 
   # ============================================================================
   # REDIS - Cache & Message Broker
@@ -190,13 +189,12 @@ services:
   redis:
     image: redis:7-alpine
     container_name: logistics_redis
-    command: redis-server /etc/redis/redis.conf
     volumes:
       - redis_data:/data
-      - ./redis/redis.conf:/etc/redis/redis.conf:ro
-      - ./logs/redis:/var/log/redis
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT:-6379}:6379"
+    command: redis-server /usr/local/etc/redis/redis.conf --appendonly yes
     restart: unless-stopped
     networks:
       - logistics_network
@@ -211,8 +209,7 @@ services:
 
   # ============================================================================
   # CELERY WORKER - Background Tasks
-  # ============================================================================
-  celery:
+  # ============================================================================  celery:
     build:
       context: .
       dockerfile: Dockerfile
@@ -252,8 +249,7 @@ services:
 
   # ============================================================================
   # CELERY BEAT - Task Scheduler
-  # ============================================================================
-  celery-beat:
+  # ============================================================================  celery-beat:
     build:
       context: .
       dockerfile: Dockerfile
@@ -280,17 +276,10 @@ services:
     restart: unless-stopped
     networks:
       - logistics_network
-    healthcheck:
-      test: ["CMD", "test", "-f", "/tmp/celerybeat.pid"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
   # ============================================================================
   # FLOWER - Celery Monitoring
-  # ============================================================================
-  flower:
+  # ============================================================================  flower:
     build:
       context: .
       dockerfile: Dockerfile
@@ -318,12 +307,6 @@ services:
     restart: unless-stopped
     networks:
       - logistics_network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5555/flower/"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
 # ============================================================================
 # VOLUMES

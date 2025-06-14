@@ -71,8 +71,7 @@ class Command(BaseCommand):
             },
             {
                 'name': 'Operadores Logísticos',
-                'permissions': ['view_user', 'view_vehicle', 'view_auction']
-            },
+                'permissions': ['view_user', 'view_vehicle', 'view_auction']            },
             {
                 'name': 'Clientes',
                 'permissions': ['view_user']
@@ -94,10 +93,11 @@ class Command(BaseCommand):
         if not User.objects.filter(email='admin@example.com').exists():
             superuser = User.objects.create_superuser(
                 email='admin@example.com',
+                username='admin',
                 password='admin123',
                 first_name='Admin',
                 last_name='System',
-                phone_number='+1234567890'
+                phone='+1234567890'
             )
             
             # Agregar al grupo de administradores
@@ -138,8 +138,7 @@ class Command(BaseCommand):
                 'last_name': 'Cliente',
                 'phone_number': '+1234567893',
                 'user_type': 'customer',
-                'group': 'Clientes'
-            },
+                'group': 'Clientes'            },
         ]
 
         for user_data in users_data:

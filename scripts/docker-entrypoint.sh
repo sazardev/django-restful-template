@@ -40,7 +40,18 @@ wait_for_service() {
     log "Waiting for $service_name to be ready at $host:$port..."
     
     for i in $(seq 1 $timeout); do
-        if nc -z "$host" "$port" 2>/dev/null; then
+        if python -c "
+import socket
+import sys
+try:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(2)
+    result = sock.connect_ex(('$host', $port))
+    sock.close()
+    sys.exit(0 if result == 0 else 1)
+except Exception:
+    sys.exit(1)
+" 2>/dev/null; then
             success "$service_name is ready!"
             return 0
         fi

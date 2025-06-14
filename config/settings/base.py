@@ -94,9 +94,6 @@ DATABASES = {
         'PASSWORD': config('DATABASE_PASSWORD', default=''),
         'HOST': config('DATABASE_HOST', default=''),
         'PORT': config('DATABASE_PORT', default=''),
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
     }
 }
 
