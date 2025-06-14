@@ -15,25 +15,17 @@ from drf_spectacular.views import (
 # API URLs
 api_v1_patterns = [
     # Authentication
-    path('auth/', include('apps.authentication.presentation.urls')),
+    path('', include('apps.authentication.urls')),
     
     # Users Management
-    path('users/', include('apps.users.presentation.urls')),
+    path('', include('apps.users.urls')),
     
     # Vehicles Management
-    path('vehicles/', include('apps.vehicles.presentation.urls')),
-    
-    # Auctions System
-    path('auctions/', include('apps.auctions.presentation.urls')),
-    
-    # Notifications
-    path('notifications/', include('apps.notifications.presentation.urls')),
-    
-    # Logistics Operations
-    path('logistics/', include('apps.logistics.presentation.urls')),
-    
-    # Audit Trail
-    path('audit/', include('apps.audit.presentation.urls')),
+    path('', include('apps.vehicles.urls')),
+      # Auctions System
+    path('', include('apps.auctions.urls')),
+      # Notifications
+    path('', include('apps.notifications.urls')),
 ]
 
 urlpatterns = [

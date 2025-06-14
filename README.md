@@ -1,404 +1,287 @@
-# 🚛 Django RESTful Logistics Template
+# 🚀 Django RESTful API Template
 
-Una plantilla profesional de Django REST API enfocada en un sistema logístico completo, implementando las mejores prácticas de desarrollo, arquitectura limpia e inyección de dependencias.
+[![Django](https://img.shields.io/badge/Django-4.2+-092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![DRF](https://img.shields.io/badge/DRF-3.14+-ff1709?style=for-the-badge&logo=django&logoColor=white)](https://www.django-rest-framework.org/)
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
-## 🌟 Características Principales
+> **Plantilla profesional de Django** enfocada en enseñar y ejemplificar una **RESTful API avanzada** usando Django y Django REST Framework (DRF), con **arquitectura de código limpio**, inyección de dependencias, mejores estándares y documentación completa.
 
-### 🏗️ Arquitectura
+## 🎯 Características Principales
 
-- **Clean Architecture**: Separación clara de capas (Domain, Application, Infrastructure)
-- **Dependency Injection**: Inyección de dependencias con interfaces
-- **Repository Pattern**: Abstracción de acceso a datos
-- **Service Layer**: Lógica de negocio encapsulada
-- **CQRS Pattern**: Separación de comandos y consultas
+### ✅ **Arquitectura Limpia Implementada**
 
-### 🔐 Seguridad
+- **Domain Layer**: Entidades de negocio y reglas de dominio
+- **Application Layer**: Casos de uso y servicios de aplicación
+- **Infrastructure Layer**: Implementaciones de bases de datos y servicios externos
+- **Presentation Layer**: APIs REST, serializers y views
+- **Shared Layer**: Código compartido y utilidades
 
-- **JWT Authentication**: Autenticación con tokens JWT
-- **Role-based Access Control**: Control de acceso basado en roles
-- **Group Permissions**: Permisos granulares por grupos
-- **API Throttling**: Limitación de requests
-- **CORS Configuration**: Configuración de CORS segura
+### 🔐 **Sistema de Autenticación Avanzado**
 
-### 📊 Sistema Logístico
+- Modelo de usuario personalizado con UUID
+- Autenticación JWT con refresh tokens
+- Múltiples roles de usuario (Admin, Carrier, Logistics, Customer)
+- 2FA (preparado para implementar)
+- Password reset y verificación de email
+- Gestión de sesiones y seguridad
 
-- **Gestión de Vehículos**: CRUD completo de vehículos
-- **Sistema de Subastas**: Subastas en tiempo real
-- **Tracking en Tiempo Real**: WebSockets para seguimiento
-- **Notificaciones**: Sistema de notificaciones push
-- **Historial de Procesos**: Auditoría completa de acciones
+### 🚛 **Sistema Logístico Completo**
 
-### 🛠️ Tecnologías
+- **Vehículos**: CRUD completo con especificaciones técnicas
+- **Subastas**: Sistema de pujas en tiempo real
+- **Mantenimiento**: Historial y programación
+- **Tracking**: Ubicaciones GPS y rutas
+- **Documentos**: Gestión de archivos y certificados
 
-- **Django 4.2**: Framework web robusto
-- **Django REST Framework**: API REST potente
-- **PostgreSQL**: Base de datos relacional
-- **Redis**: Cache y message broker
-- **Celery**: Tareas asíncronas
-- **Channels**: WebSockets para tiempo real
-- **JWT**: Autenticación segura
+### 🌐 **API RESTful Profesional**
 
-### 📚 Documentación
+- Endpoints completamente documentados
+- Paginación y filtros avanzados
+- Rate limiting y throttling
+- Versionado de API
+- Validación robusta de datos
+- Error handling consistente
 
-- **OpenAPI/Swagger**: Documentación automática de API
-- **Docstrings**: Documentación completa del código
-- **Type Hints**: Tipado estático para mejor desarrollo
+### 📚 **Documentación Automática**
 
-## 🚀 Instalación Rápida
+- **Swagger UI** interactivo (`/api/docs/`)
+- **ReDoc** elegante (`/api/redoc/`)
+- **OpenAPI 3.0** Schema (`/api/schema/`)
+- Ejemplos de código y testing
 
-### Prerrequisitos
+### 🏥 **Monitoring y Health Checks**
 
-- Python 3.9+
-- PostgreSQL 12+
-- Redis 6+
-- Node.js 16+ (para frontend opcional)
+- Multiple endpoints de salud
+- Logging estructurado
+- Error tracking con UUIDs
+- Métricas de performance
 
-### 1. Clonar el repositorio
+## 🚀 Quick Start
+
+### 1. **Clonar y Configurar**
 
 ```bash
-git clone <repository-url>
+# Clonar el repositorio
+git clone https://github.com/tu-usuario/django-restful-template.git
 cd django-restful-template
-```
 
-### 2. Crear y activar entorno virtual
-
-```bash
-# Windows
+# Crear entorno virtual
 python -m venv venv
-venv\Scripts\activate
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # Linux/Mac
 
-# Linux/Mac
-python -m venv venv
-source venv/bin/activate
-```
-
-### 3. Instalar dependencias
-
-```bash
+# Instalar dependencias
 pip install -r requirements.txt
 ```
 
-### 4. Configurar variables de entorno
+### 2. **Configurar Variables de Entorno**
 
 ```bash
+# Copiar template de variables
 cp .env.example .env
+
 # Editar .env con tus configuraciones
+# SECRET_KEY, DATABASE_URL, etc.
 ```
 
-### 5. Configurar base de datos
+### 3. **Inicializar Base de Datos**
 
 ```bash
-# Crear base de datos PostgreSQL
-createdb logistics_db
-
 # Ejecutar migraciones
 python manage.py migrate
 
-# Crear superusuario
-python manage.py createsuperuser
+# Crear datos iniciales y usuarios de prueba
+python manage.py setup_initial_data
 
-# Cargar datos de prueba
-python manage.py loaddata fixtures/initial_data.json
+# Crear superusuario (opcional)
+python manage.py createsuperuser
 ```
 
-### 6. Ejecutar servidor de desarrollo
+### 4. **Ejecutar el Servidor**
 
 ```bash
-# Terminal 1: Django
+# Modo desarrollo
 python manage.py runserver
 
-# Terminal 2: Celery Worker
-celery -A config worker -l info
-
-# Terminal 3: Celery Beat
-celery -A config beat -l info
+# Verificar funcionamiento
+python demo_api.py
 ```
+
+### 5. **Explorar la API**
+
+- 🏠 **Admin Panel**: http://127.0.0.1:8000/admin/
+- 📖 **Swagger UI**: http://127.0.0.1:8000/api/docs/
+- 📘 **ReDoc**: http://127.0.0.1:8000/api/redoc/
+- 🔍 **Health Check**: http://127.0.0.1:8000/health/
+- 🌐 **API Root**: http://127.0.0.1:8000/api/v1/
+
+## 🐳 Docker Setup
+
+```bash
+# Ejecutar con Docker Compose
+docker-compose up --build
+
+# En background
+docker-compose up -d
+
+# Ver logs
+docker-compose logs -f
+```
+
+## 👤 Usuarios de Prueba
+
+El comando `setup_initial_data` crea usuarios de ejemplo:
+
+| Email                     | Rol       | Password         |
+| ------------------------- | --------- | ---------------- |
+| admin@example.com         | Superuser | (auto-generated) |
+| transportista@example.com | Carrier   | transport123     |
+| operador@example.com      | Logistics | operator123      |
+| cliente@example.com       | Customer  | client123        |
 
 ## 📁 Estructura del Proyecto
 
 ```
 django-restful-template/
-├── 📁 config/                    # Configuración principal
-│   ├── settings/
-│   │   ├── __init__.py
-│   │   ├── base.py              # Configuración base
-│   │   ├── development.py       # Configuración desarrollo
-│   │   ├── production.py        # Configuración producción
-│   │   └── testing.py           # Configuración testing
-│   ├── urls.py                  # URLs principales
-│   ├── wsgi.py                  # WSGI config
-│   ├── asgi.py                  # ASGI config (WebSockets)
-│   └── celery.py               # Configuración Celery
-│
-├── 📁 apps/                      # Aplicaciones del proyecto
-│   ├── 📁 authentication/       # Sistema de autenticación
-│   │   ├── domain/              # Lógica de dominio
-│   │   ├── application/         # Casos de uso
-│   │   ├── infrastructure/      # Implementaciones
-│   │   └── presentation/        # Controllers/Views
-│   │
-│   ├── 📁 users/                # Gestión de usuarios
-│   ├── 📁 vehicles/             # Gestión de vehículos
-│   ├── 📁 auctions/             # Sistema de subastas
-│   ├── 📁 notifications/        # Sistema de notificaciones
-│   ├── 📁 logistics/            # Lógica logística
-│   └── 📁 audit/                # Auditoría y logs
-│
-├── 📁 shared/                    # Código compartido
-│   ├── 📁 domain/               # Interfaces y abstracciones
-│   ├── 📁 infrastructure/       # Implementaciones comunes
-│   └── 📁 utils/                # Utilidades
-│
-├── 📁 tests/                     # Tests organizados
-├── 📁 docs/                      # Documentación
-├── 📁 fixtures/                  # Datos de prueba
-├── 📁 media/                     # Archivos multimedia
-├── 📁 static/                    # Archivos estáticos
-└── 📁 logs/                      # Archivos de log
+├── 📱 apps/                    # Aplicaciones Django
+│   ├── authentication/        # Sistema de autenticación
+│   ├── users/                 # Gestión de usuarios
+│   ├── vehicles/              # CRUD de vehículos
+│   ├── auctions/              # Sistema de subastas
+│   └── notifications/         # Notificaciones
+├── ⚙️ config/                  # Configuración
+│   ├── settings/              # Settings por ambiente
+│   ├── urls.py               # URL routing principal
+│   └── celery.py             # Configuración Celery
+├── 🔧 shared/                  # Código compartido
+│   ├── domain/               # Excepciones de dominio
+│   └── infrastructure/       # Infraestructura común
+├── 📚 docs/                    # Documentación
+├── 🐳 docker-compose.yml       # Docker Compose
+├── 📋 requirements.txt         # Dependencias Python
+└── 🚀 demo_api.py             # Script de demostración
 ```
 
-## 🔑 Usuarios y Roles por Defecto
-
-### Roles del Sistema
-
-- **Super Admin**: Acceso completo al sistema
-- **Logistics Manager**: Gestión de operaciones logísticas
-- **Fleet Manager**: Gestión de flota de vehículos
-- **Auction Manager**: Gestión de subastas
-- **Driver**: Conductor de vehículos
-- **Client**: Cliente del sistema logístico
-
-### Usuarios de Prueba
-
-```
-Super Admin:
-- Username: admin
-- Password: admin123
-
-Logistics Manager:
-- Username: logistics_manager
-- Password: logistics123
-
-Fleet Manager:
-- Username: fleet_manager
-- Password: fleet123
-
-Driver:
-- Username: driver1
-- Password: driver123
-
-Client:
-- Username: client1
-- Password: client123
-```
-
-## 🌐 API Endpoints
-
-### 📋 Documentación de API
-
-- **Swagger UI**: `http://localhost:8000/api/docs/`
-- **ReDoc**: `http://localhost:8000/api/redoc/`
-- **OpenAPI Schema**: `http://localhost:8000/api/schema/`
-
-### 🔐 Autenticación
-
-```
-POST /api/auth/login/          # Login
-POST /api/auth/logout/         # Logout
-POST /api/auth/register/       # Registro
-POST /api/auth/refresh/        # Refresh token
-POST /api/auth/password/reset/ # Reset password
-```
-
-### 👥 Usuarios
-
-```
-GET    /api/users/           # Listar usuarios
-POST   /api/users/           # Crear usuario
-GET    /api/users/{id}/      # Obtener usuario
-PUT    /api/users/{id}/      # Actualizar usuario
-DELETE /api/users/{id}/      # Eliminar usuario
-GET    /api/users/me/        # Perfil actual
-```
-
-### 🚛 Vehículos
-
-```
-GET    /api/vehicles/         # Listar vehículos
-POST   /api/vehicles/         # Crear vehículo
-GET    /api/vehicles/{id}/    # Obtener vehículo
-PUT    /api/vehicles/{id}/    # Actualizar vehículo
-DELETE /api/vehicles/{id}/    # Eliminar vehículo
-GET    /api/vehicles/{id}/tracking/ # Tracking en tiempo real
-```
-
-### 🏆 Subastas
-
-```
-GET    /api/auctions/         # Listar subastas
-POST   /api/auctions/         # Crear subasta
-GET    /api/auctions/{id}/    # Obtener subasta
-POST   /api/auctions/{id}/bid/ # Realizar puja
-GET    /api/auctions/{id}/bids/ # Listar pujas
-```
-
-### 🔔 Notificaciones
-
-```
-GET    /api/notifications/    # Listar notificaciones
-POST   /api/notifications/mark-read/{id}/ # Marcar como leída
-DELETE /api/notifications/{id}/ # Eliminar notificación
-```
-
-## 🧪 Testing
-
-### Ejecutar Tests
+## 🔧 Comandos Útiles
 
 ```bash
-# Todos los tests
-pytest
+# 🔍 Verificar el proyecto
+python manage.py check
 
-# Tests con cobertura
-pytest --cov=apps
+# 📊 Ver todas las URLs
+python manage.py show_urls
 
-# Tests específicos
-pytest apps/vehicles/tests/
+# 🧪 Ejecutar tests
+python manage.py test
 
-# Tests de integración
-pytest tests/integration/
-```
-
-### Estructura de Tests
-
-```
-tests/
-├── unit/           # Tests unitarios
-├── integration/    # Tests de integración
-├── e2e/           # Tests end-to-end
-└── fixtures/      # Datos de prueba
-```
-
-## 🔧 Desarrollo
-
-### Comandos Útiles
-
-```bash
-# Formatear código
-black .
-isort .
-
-# Linting
-flake8
-
-# Generar migraciones
+# 📝 Crear migraciones
 python manage.py makemigrations
 
-# Ejecutar migraciones
+# 🔄 Aplicar migraciones
 python manage.py migrate
 
-# Crear app
-python manage.py startapp nombre_app
-
-# Shell de Django
-python manage.py shell
-
-# Recolectar archivos estáticos
+# 📁 Colectar archivos estáticos
 python manage.py collectstatic
+
+# 💬 Shell interactivo
+python manage.py shell
 ```
 
-### Pre-commit Hooks
+## 🌟 Casos de Uso
 
-```bash
-# Instalar pre-commit
-pre-commit install
+Este template es ideal para:
 
-# Ejecutar en todos los archivos
-pre-commit run --all-files
-```
+- 🚛 **Sistemas Logísticos**: Gestión de flotas y transporte
+- 🏪 **Marketplaces**: Plataformas de compra/venta
+- 🔄 **Sistemas de Subastas**: Pujas en tiempo real
+- 📱 **APIs Backend**: Para aplicaciones móviles/web
+- 🏢 **ERPs**: Sistemas de gestión empresarial
+- 🎓 **Proyectos Educativos**: Aprender Django + DRF
 
-## 🚀 Despliegue
+## 🛠️ Tecnologías
 
-### Docker (Recomendado)
+### Backend
 
-```bash
-# Construir imagen
-docker build -t logistics-api .
+- **Django 4.2+**: Framework web principal
+- **Django REST Framework**: API REST
+- **Simple JWT**: Autenticación JWT
+- **drf-spectacular**: Documentación OpenAPI
 
-# Ejecutar con docker-compose
-docker-compose up -d
-```
+### Base de Datos
 
-### Producción Manual
+- **SQLite**: Desarrollo (incluido)
+- **PostgreSQL**: Producción (recomendado)
+- **MySQL**: Alternativa soportada
 
-```bash
-# Instalar dependencias de producción
-pip install -r requirements/production.txt
+### DevOps
 
-# Configurar variables de entorno
-export DJANGO_SETTINGS_MODULE=config.settings.production
+- **Docker & Docker Compose**: Containerización
+- **WhiteNoise**: Servir archivos estáticos
+- **python-decouple**: Variables de entorno
 
-# Recolectar archivos estáticos
-python manage.py collectstatic --noinput
+### Desarrollo
 
-# Ejecutar con Gunicorn
-gunicorn config.wsgi:application
-```
+- **django-debug-toolbar**: Debug en desarrollo
+- **django-extensions**: Comandos útiles
+- **django-cors-headers**: CORS para frontend
 
-## 📊 Monitoreo
+## 📈 Roadmap
 
-### Logs
+### ✅ Completado (v1.0)
 
-Los logs se guardan en `logs/django.log` y están configurados con diferentes niveles:
+- [x] Arquitectura limpia implementada
+- [x] Sistema de usuarios y autenticación
+- [x] CRUD de vehículos completo
+- [x] Sistema de subastas básico
+- [x] API REST documentada
+- [x] Panel administrativo
+- [x] Health checks y monitoring
+- [x] Docker setup
 
-- **DEBUG**: Información detallada de debugging
-- **INFO**: Información general
-- **WARNING**: Advertencias
-- **ERROR**: Errores
-- **CRITICAL**: Errores críticos
+### 🔄 En Progreso (v1.1)
 
-### Métricas
+- [ ] WebSocket con Django Channels
+- [ ] Notificaciones en tiempo real
+- [ ] Tests de cobertura completa
+- [ ] CI/CD pipeline
 
-- **Performance**: Tiempo de respuesta de APIs
-- **Usage**: Uso de endpoints
-- **Errors**: Tracking de errores
-- **Security**: Intentos de acceso no autorizado
+### 🎯 Futuro (v2.0)
 
-## 🤝 Contribución
+- [ ] Cache con Redis
+- [ ] Celery para tareas asíncronas
+- [ ] Elasticsearch para búsqueda
+- [ ] GraphQL endpoint
+- [ ] Métricas con Prometheus
 
-1. Fork del proyecto
-2. Crear rama feature (`git checkout -b feature/nueva-caracteristica`)
-3. Commit cambios (`git commit -am 'Agregar nueva característica'`)
-4. Push a la rama (`git push origin feature/nueva-caracteristica`)
-5. Crear Pull Request
+## 🤝 Contribuir
 
-### Estándares de Código
+¡Las contribuciones son bienvenidas! Por favor:
 
-- **PEP 8**: Seguir estándares de Python
-- **Type Hints**: Usar tipado estático
-- **Docstrings**: Documentar funciones y clases
-- **Tests**: Mantener cobertura >90%
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+Este proyecto está bajo la Licencia MIT. Ver [LICENSE](LICENSE) para más detalles.
 
 ## 🆘 Soporte
 
-- **Issues**: Reportar bugs en GitHub Issues
-- **Documentación**: Ver carpeta `docs/`
-- **Email**: soporte@logistics-template.com
+- 📧 **Email**: support@example.com
+- 🐛 **Issues**: [GitHub Issues](https://github.com/tu-usuario/django-restful-template/issues)
+- 📖 **Docs**: [Documentation](./docs/)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/tu-usuario/django-restful-template/discussions)
 
 ---
 
-## 🎯 Próximas Características
+<div align="center">
 
-- [ ] Integración con servicios de mapas
-- [ ] Sistema de reportes avanzados
-- [ ] Mobile API endpoints
-- [ ] Integración con proveedores logísticos
-- [ ] Dashboard en tiempo real
-- [ ] Análisis predictivo con ML
+**¡Template listo para producción!** 🎉
 
----
+[![GitHub stars](https://img.shields.io/github/stars/tu-usuario/django-restful-template?style=social)](https://github.com/tu-usuario/django-restful-template)
+[![GitHub forks](https://img.shields.io/github/forks/tu-usuario/django-restful-template?style=social)](https://github.com/tu-usuario/django-restful-template/fork)
 
-**¡Hecho con ❤️ para la comunidad Django!**
+</div>

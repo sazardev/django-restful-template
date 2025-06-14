@@ -215,3 +215,121 @@ class VehicleSearchDTO:
     sort_by: Optional[str] = None
     sort_direction: str = "asc"
     include_inactive: bool = False
+
+
+# Alias para compatibilidad con views
+CreateVehicleDTO = VehicleCreateDTO
+UpdateVehicleDTO = VehicleUpdateDTO
+VehicleSearchCriteriaDTO = VehicleSearchDTO
+
+
+@dataclass
+class VehicleBulkActionDTO:
+    """DTO para acciones en lote sobre vehículos."""
+    vehicle_ids: List[UUID]
+    action: str  # 'activate', 'deactivate', 'assign_driver', 'schedule_maintenance'
+    action_params: Dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class VehicleExportDTO:
+    """DTO para exportación de datos de vehículos."""
+    filters: Optional[VehicleFilterDTO] = None
+    format: str = "xlsx"  # 'xlsx', 'csv', 'json'
+    include_maintenance_history: bool = False
+    include_location_history: bool = False
+    include_analytics: bool = False
+
+
+@dataclass
+class VehicleImportDTO:
+    """DTO para importación de vehículos."""
+    file_content: bytes
+    file_format: str  # 'xlsx', 'csv', 'json'
+    validate_only: bool = False
+    auto_assign_owners: bool = False
+    default_specifications: Optional[VehicleSpecificationsDTO] = None
+
+
+@dataclass
+class VehicleNotificationDTO:
+    """DTO para notificaciones de vehículos."""
+    vehicle_id: UUID
+    notification_type: str  # 'maintenance_due', 'insurance_expiring', 'location_alert', etc.
+    message: str
+    priority: str = "medium"  # 'low', 'medium', 'high', 'critical'
+    recipients: List[UUID] = field(default_factory=list)
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class VehicleRouteOptimizationDTO:
+    """DTO para optimización de rutas."""
+    vehicles: List[UUID]
+    start_location: GPSLocationDTO
+    end_location: GPSLocationDTO
+    waypoints: List[GPSLocationDTO] = field(default_factory=list)
+    optimization_criteria: str = "distance"  # 'distance', 'time', 'fuel', 'cost'
+    constraints: Dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class VehiclePerformanceMetricsDTO:
+    """DTO para métricas de rendimiento de vehículo."""
+    vehicle_id: UUID
+    period_start: datetime
+    period_end: datetime
+    
+    # Métricas de operación
+    total_distance_km: Decimal = Decimal('0')
+    active_hours: Decimal = Decimal('0')
+    idle_hours: Decimal = Decimal('0')
+    average_speed_kmh: Decimal = Decimal('0')
+    
+    # Métricas de combustible
+    fuel_consumed_liters: Optional[Decimal] = None
+    fuel_efficiency_km_per_liter: Optional[Decimal] = None
+    fuel_cost: Optional[Decimal] = None
+    
+    # Métricas de mantenimiento
+    maintenance_events: int = 0
+    maintenance_cost: Decimal = Decimal('0')
+    downtime_hours: Decimal = Decimal('0')
+    
+    # Métricas financieras
+    operating_cost: Decimal = Decimal('0')
+    revenue_generated: Optional[Decimal] = None
+    profit_margin: Optional[Decimal] = None
+    
+    # Métricas de seguridad
+    incidents_count: int = 0
+    safety_score: Optional[Decimal] = None
+    
+    # Métricas de utilización
+    utilization_rate: Decimal = Decimal('0')
+    availability_rate: Decimal = Decimal('0')
+
+
+@dataclass
+class VehicleComplianceDTO:
+    """DTO para cumplimiento normativo de vehículos."""
+    vehicle_id: UUID
+    
+    # Documentación
+    registration_status: str = "unknown"  # 'valid', 'expired', 'expiring_soon', 'unknown'
+    insurance_status: str = "unknown"
+    inspection_status: str = "unknown"
+    
+    # Fechas importantes
+    registration_expiry: Optional[datetime] = None
+    insurance_expiry: Optional[datetime] = None
+    next_inspection_date: Optional[datetime] = None
+    
+    # Alertas y recordatorios
+    pending_renewals: List[str] = field(default_factory=list)
+    compliance_score: Optional[Decimal] = None
+    risk_level: str = "low"  # 'low', 'medium', 'high', 'critical'
+    
+    # Acciones requeridas
+    required_actions: List[str] = field(default_factory=list)
+    deadlines: Dict[str, datetime] = field(default_factory=dict)

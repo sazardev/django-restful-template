@@ -22,6 +22,11 @@ class ValidationException(DomainException):
         super().__init__(f"Error de validación en {field}: {message}")
 
 
+class ValidationError(ValidationException):
+    """Alias for ValidationException to maintain compatibility"""
+    pass
+
+
 class BusinessRuleException(DomainException):
     """Excepción de regla de negocio."""
     

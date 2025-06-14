@@ -333,3 +333,19 @@ class NotificationBatch:
     def is_completed(self) -> bool:
         """Verificar si el lote está completado."""
         return self.calculate_progress() >= 100.0
+
+
+@dataclass
+class NotificationChannelEntity:
+    """Entidad de canal de notificación."""
+    
+    id: UUID
+    user_id: UUID
+    channel_name: str
+    is_active: bool = True
+    created_at: Optional[datetime] = None
+    last_activity: Optional[datetime] = None
+    
+    def update_activity(self) -> None:
+        """Actualizar última actividad."""
+        self.last_activity = datetime.now()

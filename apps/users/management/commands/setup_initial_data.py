@@ -145,12 +145,13 @@ class Command(BaseCommand):
         for user_data in users_data:
             if not User.objects.filter(email=user_data['email']).exists():
                 user = User.objects.create_user(
+                    username=user_data['email'].split('@')[0],  # Use email prefix as username
                     email=user_data['email'],
                     password=user_data['password'],
                     first_name=user_data['first_name'],
                     last_name=user_data['last_name'],
-                    phone_number=user_data['phone_number'],
-                    user_type=user_data['user_type']
+                    phone=user_data['phone_number'],
+                    role=user_data['user_type']
                 )
                 
                 # Agregar al grupo correspondiente

@@ -5,6 +5,7 @@ Serializadores para el sistema de vehículos.
 
 from rest_framework import serializers
 from decimal import Decimal
+from django.db.models import Sum
 
 from apps.vehicles.infrastructure.models import (
     Vehicle, VehicleLocation, MaintenanceRecord, VehicleDocument
@@ -369,3 +370,215 @@ class VehicleAnalyticsSerializer(serializers.Serializer):
         choices=['utilization', 'performance', 'maintenance_costs', 'fleet_summary'],
         default='utilization'
     )
+
+
+# Alias para compatibilidad con views
+CreateVehicleSerializer = VehicleCreateSerializer
+UpdateVehicleSerializer = VehicleUpdateSerializer
+
+
+class VehicleListSerializer(serializers.ModelSerializer):
+    """Serializador simplificado para listado de vehículos."""
+    
+    owner_name = serializers.CharField(source='owner.get_full_name', read_only=True)
+    current_driver_name = serializers.CharField(source='current_driver.get_full_name', read_only=True)
+    is_available = serializers.ReadOnlyField()
+    needs_maintenance = serializers.ReadOnlyField()
+    
+    class Meta:
+        model = Vehicle
+        fields = [
+            'id', 'license_plate', 'brand', 'model', 'year', 'color',
+            'vehicle_type', 'status', 'owner_name', 'current_driver_name',
+            'total_mileage_km', 'is_available', 'needs_maintenance',
+            'created_at', 'updated_at'
+        ]
+        read_only_fields = [
+            'id', 'owner_name', 'current_driver_name', 'is_available',
+            'needs_maintenance', 'created_at', 'updated_at'
+        ]
+
+
+class VehicleDetailSerializer(VehicleSerializer):
+    """Serializador detallado para vehículos con toda la información."""
+    
+    recent_locations = serializers.SerializerMethodField()
+    maintenance_summary = serializers.SerializerMethodField()
+    compliance_status = serializers.SerializerMethodField()
+    
+    class Meta(VehicleSerializer.Meta):
+        fields = VehicleSerializer.Meta.fields + [
+            'recent_locations', 'maintenance_summary', 'compliance_status'
+        ]
+    
+    def get_recent_locations(self, obj):
+        """Obtener las últimas 5 ubicaciones del vehículo."""
+        recent_locations = obj.locations.order_by('-created_at')[:5]
+        return VehicleLocationSerializer(recent_locations, many=True).data
+    
+    def get_maintenance_summary(self, obj):
+        """Obtener resumen de mantenimiento."""
+        maintenance_records = obj.maintenance_records.order_by('-performed_at')[:5]
+        total_cost = maintenance_records.aggregate(
+            total=Sum('cost')
+        )['total'] or 0
+        
+        return {
+            'total_records': obj.maintenance_records.count(),
+            'recent_records': MaintenanceRecordSerializer(maintenance_records, many=True).data,
+            'total_cost_last_year': total_cost,
+            'last_maintenance': maintenance_records.first().performed_at if maintenance_records.exists() else None
+        }
+    
+    def get_compliance_status(self, obj):
+        """Obtener estado de cumplimiento."""
+        from datetime import datetime, timedelta
+        now = datetime.now().date()
+        
+        registration_status = 'unknown'
+        insurance_status = 'unknown'
+        
+        if obj.registration_expiry:
+            days_to_reg_expiry = (obj.registration_expiry.date() - now).days
+            if days_to_reg_expiry < 0:
+                registration_status = 'expired'
+            elif days_to_reg_expiry <= 30:
+                registration_status = 'expiring_soon'
+            else:
+                registration_status = 'valid'
+        
+        if obj.insurance_expiry:
+            days_to_ins_expiry = (obj.insurance_expiry.date() - now).days
+            if days_to_ins_expiry < 0:
+                insurance_status = 'expired'
+            elif days_to_ins_expiry <= 30:
+                insurance_status = 'expiring_soon'
+            else:
+                insurance_status = 'valid'
+        
+        return {
+            'registration_status': registration_status,
+            'insurance_status': insurance_status,
+            'registration_expiry': obj.registration_expiry,
+            'insurance_expiry': obj.insurance_expiry,
+            'overall_compliance': 'compliant' if registration_status == 'valid' and insurance_status == 'valid' else 'non_compliant'
+        }
+
+
+class VehicleBulkActionSerializer(serializers.Serializer):
+    """Serializador para acciones en lote sobre vehículos."""
+    
+    vehicle_ids = serializers.ListField(
+        child=serializers.UUIDField(),
+        min_length=1,
+        max_length=100
+    )
+    action = serializers.ChoiceField(choices=[
+        ('activate', 'Activar'),
+        ('deactivate', 'Desactivar'),
+        ('assign_driver', 'Asignar conductor'),
+        ('unassign_driver', 'Desasignar conductor'),
+        ('schedule_maintenance', 'Programar mantenimiento'),
+        ('update_status', 'Actualizar estado'),
+        ('export', 'Exportar'),
+        ('delete', 'Eliminar')
+    ])
+    action_params = serializers.JSONField(required=False, default=dict)
+    
+    def validate_vehicle_ids(self, value):
+        """Validar que todos los vehículos existen."""
+        existing_ids = set(Vehicle.objects.filter(id__in=value).values_list('id', flat=True))
+        missing_ids = set(value) - existing_ids
+        
+        if missing_ids:
+            raise serializers.ValidationError(
+                f"Los siguientes vehículos no existen: {list(missing_ids)}"
+            )
+        
+        return value
+    
+    def validate(self, data):
+        """Validaciones específicas por acción."""
+        action = data.get('action')
+        action_params = data.get('action_params', {})
+        
+        if action == 'assign_driver' and 'driver_id' not in action_params:
+            raise serializers.ValidationError(
+                "Para asignar conductor se requiere 'driver_id' en action_params"
+            )
+        
+        if action == 'update_status' and 'status' not in action_params:
+            raise serializers.ValidationError(
+                "Para actualizar estado se requiere 'status' en action_params"
+            )
+        
+        if action == 'schedule_maintenance':
+            required_fields = ['maintenance_type', 'scheduled_date']
+            missing_fields = [field for field in required_fields if field not in action_params]
+            if missing_fields:
+                raise serializers.ValidationError(
+                    f"Para programar mantenimiento se requieren: {missing_fields}"
+                )
+        
+        return data
+
+
+class VehicleSearchSerializer(serializers.Serializer):
+    """Serializador para búsqueda avanzada de vehículos."""
+    
+    query = serializers.CharField(max_length=200, required=False, allow_blank=True)
+    filters = VehicleFilterSerializer(required=False)
+    sort_by = serializers.ChoiceField(
+        choices=[
+            ('license_plate', 'Placa'),
+            ('brand', 'Marca'),
+            ('model', 'Modelo'),
+            ('year', 'Año'),
+            ('created_at', 'Fecha de creación'),
+            ('total_mileage_km', 'Kilometraje'),
+            ('status', 'Estado')
+        ],
+        required=False,
+        default='license_plate'
+    )
+    sort_direction = serializers.ChoiceField(
+        choices=[('asc', 'Ascendente'), ('desc', 'Descendente')],
+        default='asc'
+    )
+    include_inactive = serializers.BooleanField(default=False)
+    page = serializers.IntegerField(min_value=1, default=1)
+    page_size = serializers.IntegerField(min_value=1, max_value=100, default=20)
+
+
+class VehicleSummarySerializer(serializers.ModelSerializer):
+    """Serializer resumido para vehículo."""
+    
+    type_name = serializers.CharField(source='type.name', read_only=True)
+    location_address = serializers.SerializerMethodField()
+    main_image = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Vehicle
+        fields = [
+            'id', 'make', 'model', 'year', 'type_name',
+            'license_plate', 'status', 'mileage', 'condition',
+            'location_address', 'main_image'
+        ]
+        read_only_fields = fields
+    
+    def get_location_address(self, obj):
+        """Obtener dirección de ubicación actual."""
+        current_location = obj.locations.filter(is_current=True).first()
+        if current_location:
+            return current_location.address
+        return None
+    
+    def get_main_image(self, obj):
+        """Obtener imagen principal del vehículo."""
+        first_image = obj.images.first()
+        if first_image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(first_image.image.url)
+            return first_image.image.url
+        return None

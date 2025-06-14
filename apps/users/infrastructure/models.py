@@ -124,8 +124,7 @@ class User(AbstractUser):
         null=True,
         verbose_name=_('Token de verificación de email')
     )
-    
-    # Campos de auditoría
+      # Campos de auditoría
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name=_('Fecha de creación')
@@ -134,6 +133,27 @@ class User(AbstractUser):
     updated_at = models.DateTimeField(
         auto_now=True,
         verbose_name=_('Fecha de actualización')
+    )
+    
+    # Resolver conflictos con AbstractUser
+    groups = models.ManyToManyField(
+        'auth.Group',
+        verbose_name=_('groups'),
+        blank=True,
+        help_text=_(
+            'The groups this user belongs to. A user will get all permissions '
+            'granted to each of their groups.'
+        ),
+        related_name="custom_user_set",
+        related_query_name="custom_user",
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        verbose_name=_('user permissions'),
+        blank=True,
+        help_text=_('Specific permissions for this user.'),
+        related_name="custom_user_set",
+        related_query_name="custom_user",
     )
     
     # Configuración de Django
@@ -226,6 +246,7 @@ class UserGroup(models.Model):
     users = models.ManyToManyField(
         User,
         through='UserGroupMembership',
+        through_fields=('group', 'user'),
         related_name='custom_groups',
         verbose_name=_('Usuarios')
     )

@@ -16,6 +16,7 @@ curl -X POST http://localhost:8000/api/v1/auth/login/ \
 ```
 
 Respuesta:
+
 ```json
 {
   "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
@@ -161,18 +162,18 @@ curl -H "Authorization: Bearer TOKEN" \
 
 ```javascript
 // Cliente JavaScript
-const socket = new WebSocket(
-  'ws://localhost:8000/ws/notifications/',
-  ['authorization', 'Bearer ' + token]
-);
+const socket = new WebSocket("ws://localhost:8000/ws/notifications/", [
+  "authorization",
+  "Bearer " + token,
+]);
 
-socket.onmessage = function(event) {
+socket.onmessage = function (event) {
   const data = JSON.parse(event.data);
-  console.log('Notificación recibida:', data);
+  console.log("Notificación recibida:", data);
 };
 
-socket.onopen = function(event) {
-  console.log('Conectado a notificaciones');
+socket.onopen = function (event) {
+  console.log("Conectado a notificaciones");
 };
 ```
 
@@ -202,6 +203,7 @@ curl -H "Authorization: Bearer TOKEN" \
 ```
 
 Respuesta:
+
 ```json
 {
   "total_vehicles": 25,
@@ -213,8 +215,8 @@ Respuesta:
   "total_capacity_volume_m3": "2500.00",
   "utilization_rate": 80.0,
   "maintenance_cost_trend": {
-    "2024-01": 15000.00,
-    "2024-02": 12000.00
+    "2024-01": 15000.0,
+    "2024-02": 12000.0
   }
 }
 ```
@@ -288,13 +290,13 @@ curl -X POST http://localhost:8000/api/v1/vehicles/{vehicle_id}/complete-mainten
 
 ## Códigos de Error Comunes
 
-| Código | Descripción | Solución |
-|--------|-------------|----------|
-| 401 | No autenticado | Incluir token JWT válido |
-| 403 | Sin permisos | Verificar permisos del usuario |
-| 404 | Recurso no encontrado | Verificar ID del recurso |
-| 400 | Datos inválidos | Revisar formato de datos |
-| 429 | Demasiadas peticiones | Implementar rate limiting |
+| Código | Descripción           | Solución                       |
+| ------ | --------------------- | ------------------------------ |
+| 401    | No autenticado        | Incluir token JWT válido       |
+| 403    | Sin permisos          | Verificar permisos del usuario |
+| 404    | Recurso no encontrado | Verificar ID del recurso       |
+| 400    | Datos inválidos       | Revisar formato de datos       |
+| 429    | Demasiadas peticiones | Implementar rate limiting      |
 
 ## Variables de Entorno
 

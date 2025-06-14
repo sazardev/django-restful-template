@@ -5,12 +5,14 @@ Esta guía detalla cómo desplegar la aplicación Django RESTful Template en dif
 ## Requisitos del Sistema
 
 ### Desarrollo Local
+
 - Python 3.10+
 - PostgreSQL 12+
 - Redis 6+
 - Node.js 16+ (para frontend opcional)
 
 ### Producción
+
 - Python 3.10+
 - PostgreSQL 12+
 - Redis 6+
@@ -367,7 +369,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:8000", "config.wsgi:application"]
 #### 2. docker-compose.yml
 
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   web:
@@ -461,11 +463,13 @@ docker-compose logs -f
 #### AWS (usando Elastic Beanstalk)
 
 1. **Instalar EB CLI**
+
 ```bash
 pip install awsebcli
 ```
 
 2. **Configurar aplicación**
+
 ```bash
 eb init
 eb create production
@@ -477,29 +481,30 @@ eb deploy
 #### Digital Ocean (usando App Platform)
 
 1. **Crear app.yaml**
+
 ```yaml
 name: logistics-api
 services:
-- name: web
-  source_dir: /
-  github:
-    repo: your-username/django-restful-template
-    branch: main
-  run_command: gunicorn --worker-tmp-dir /dev/shm config.wsgi
-  environment_slug: python
-  instance_count: 1
-  instance_size_slug: basic-xxs
-  envs:
-  - key: DEBUG
-    value: "False"
-  - key: DATABASE_URL
-    value: ${db.DATABASE_URL}
+  - name: web
+    source_dir: /
+    github:
+      repo: your-username/django-restful-template
+      branch: main
+    run_command: gunicorn --worker-tmp-dir /dev/shm config.wsgi
+    environment_slug: python
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    envs:
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        value: ${db.DATABASE_URL}
 databases:
-- engine: PG
-  name: db
-  num_nodes: 1
-  size: db-s-dev-database
-  version: "13"
+  - engine: PG
+    name: db
+    num_nodes: 1
+    size: db-s-dev-database
+    version: "13"
 ```
 
 #### Heroku
@@ -606,11 +611,11 @@ def health_check(request):
         # Check database
         db_conn = connections['default']
         db_conn.cursor()
-        
+
         # Check cache
         cache.set('health_check', 'ok', 30)
         cache_status = cache.get('health_check')
-        
+
         return JsonResponse({
             'status': 'healthy',
             'database': 'ok',
@@ -628,16 +633,19 @@ def health_check(request):
 ### Problemas Comunes
 
 1. **Error de migración**
+
 ```bash
 python manage.py migrate --fake-initial
 ```
 
 2. **Archivos estáticos no se cargan**
+
 ```bash
 python manage.py collectstatic --clear --noinput
 ```
 
 3. **Celery no procesa tareas**
+
 ```bash
 # Verificar conexión Redis
 redis-cli ping
@@ -647,6 +655,7 @@ celery -A config purge
 ```
 
 4. **Error de permisos**
+
 ```bash
 sudo chown -R logistics:logistics /home/logistics/app
 sudo chmod -R 755 /home/logistics/app

@@ -1,0 +1,216 @@
+WARNING 2025-06-14 08:55:37,821 log 22952 24888 Not Found: /
+WARNING 2025-06-14 08:55:37,822 basehttp 22952 24888 "GET / HTTP/1.1" 404 12313
+INFO 2025-06-14 08:55:37,881 basehttp 22952 24888 "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 12621
+INFO 2025-06-14 08:55:37,891 basehttp 22952 16508 "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-06-14 08:55:37,892 basehttp 22952 21160 "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 13404
+INFO 2025-06-14 08:55:37,932 basehttp 22952 21160 "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4527
+WARNING 2025-06-14 08:55:38,076 log 22952 21160 Not Found: /favicon.ico
+WARNING 2025-06-14 08:55:38,077 basehttp 22952 21160 "GET /favicon.ico HTTP/1.1" 404 12375
+INFO 2025-06-14 08:55:41,158 basehttp 22952 21160 "GET /admin HTTP/1.1" 301 0
+INFO 2025-06-14 08:55:41,197 basehttp 22952 16508 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-06-14 08:55:41,413 basehttp 22952 16508 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 13589
+INFO 2025-06-14 08:55:41,465 basehttp 22952 16508 "GET /static/admin/css/base.css HTTP/1.1" 200 21207
+INFO 2025-06-14 08:55:41,470 basehttp 22952 24784 "GET /static/admin/css/login.css HTTP/1.1" 200 958
+INFO 2025-06-14 08:55:41,471 basehttp 22952 24888 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2929
+INFO 2025-06-14 08:55:41,472 basehttp 22952 7484 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2694
+INFO 2025-06-14 08:55:41,472 basehttp 22952 10520 "GET /static/admin/css/responsive.css HTTP/1.1" 200 18533
+INFO 2025-06-14 08:55:41,476 basehttp 22952 3412 "GET /static/admin/js/theme.js HTTP/1.1" 200 1943
+INFO 2025-06-14 08:55:41,490 basehttp 22952 16508 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-06-14 08:55:44,533 basehttp 22952 16508 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 13788
+INFO 2025-06-14 08:55:52,103 basehttp 22952 16508 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 13799
+INFO 2025-06-14 08:56:20,763 basehttp 22952 16508 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 13799
+INFO 2025-06-14 08:56:23,171 basehttp 22952 16508 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 13799
+INFO 2025-06-14 08:56:33,724 basehttp 22952 16508 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 14236
+INFO 2025-06-14 08:56:35,823 basehttp 22952 16508 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 14236
+INFO 2025-06-14 08:56:38,055 basehttp 22952 16508 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 14236
+INFO 2025-06-14 08:56:38,090 basehttp 22952 16508 "GET /static/admin/css/base.css HTTP/1.1" 200 21207
+INFO 2025-06-14 08:56:38,092 basehttp 22952 3412 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2929
+INFO 2025-06-14 08:56:38,092 basehttp 22952 10520 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2694
+INFO 2025-06-14 08:56:38,093 basehttp 22952 7484 "GET /static/admin/css/responsive.css HTTP/1.1" 200 18533
+INFO 2025-06-14 08:56:38,093 basehttp 22952 24784 "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 12621
+INFO 2025-06-14 08:56:38,094 basehttp 22952 24888 "GET /static/admin/css/login.css HTTP/1.1" 200 958
+INFO 2025-06-14 08:56:38,096 basehttp 22952 16508 "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 13404
+INFO 2025-06-14 08:56:38,097 basehttp 22952 10520 "GET /static/admin/js/theme.js HTTP/1.1" 200 1943
+INFO 2025-06-14 08:56:38,097 basehttp 22952 24784 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-06-14 08:56:38,100 basehttp 22952 24888 "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-06-14 08:56:38,125 basehttp 22952 24888 "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4527
+WARNING 2025-06-14 08:56:38,213 log 22952 24888 Not Found: /favicon.ico
+WARNING 2025-06-14 08:56:38,213 basehttp 22952 24888 "GET /favicon.ico HTTP/1.1" 404 12812
+INFO 2025-06-14 08:57:15,955 basehttp 21392 22340 "GET /admin/ HTTP/1.1" 200 10380
+INFO 2025-06-14 08:57:16,006 basehttp 21392 22340 "GET /static/debug_toolbar/js/redirect.js HTTP/1.1" 200 48
+INFO 2025-06-14 08:57:17,352 basehttp 21392 22340 "GET /admin/ HTTP/1.1" 200 10379
+INFO 2025-06-14 08:57:18,235 basehttp 21392 22340 "GET /admin/ HTTP/1.1" 200 10379
+INFO 2025-06-14 08:57:18,259 basehttp 21392 22340 "GET /static/debug_toolbar/js/redirect.js HTTP/1.1" 200 48
+INFO 2025-06-14 08:57:18,267 basehttp 21392 17804 "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-06-14 08:57:18,267 basehttp 21392 21660 "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 13404
+INFO 2025-06-14 08:57:18,268 basehttp 21392 22340 "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 12621
+INFO 2025-06-14 08:57:18,275 basehttp 21392 22340 "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4527
+WARNING 2025-06-14 08:57:18,375 log 21392 22340 Not Found: /favicon.ico
+WARNING 2025-06-14 08:57:18,375 basehttp 21392 22340 "GET /favicon.ico HTTP/1.1" 404 12812
+INFO 2025-06-14 08:57:38,523 basehttp 21900 13856 "GET /admin/ HTTP/1.1" 200 10379
+INFO 2025-06-14 08:57:38,555 basehttp 21900 13856 "GET /static/debug_toolbar/js/redirect.js HTTP/1.1" 200 48
+INFO 2025-06-14 08:57:38,557 basehttp 21900 13956 "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 12621
+INFO 2025-06-14 08:57:38,557 basehttp 21900 8412 "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-06-14 08:57:38,558 basehttp 21900 6308 "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 13404
+INFO 2025-06-14 08:57:38,573 basehttp 21900 8412 "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4527
+WARNING 2025-06-14 08:57:38,669 log 21900 8412 Not Found: /favicon.ico
+WARNING 2025-06-14 08:57:38,669 basehttp 21900 8412 "GET /favicon.ico HTTP/1.1" 404 12812
+INFO 2025-06-14 08:57:39,390 basehttp 21900 8412 "GET /admin/ HTTP/1.1" 200 10379
+INFO 2025-06-14 08:57:41,907 basehttp 21900 24520 "GET /admin/?id=915f5cd8-909a-4768-8f92-386049f8936c&vscodeBrowserReqId=1749916661886 HTTP/1.1" 302 0
+INFO 2025-06-14 08:57:41,950 basehttp 21900 24520 "GET /admin/login/?next=/admin/%3Fid%3D915f5cd8-909a-4768-8f92-386049f8936c%26vscodeBrowserReqId%3D1749916661886 HTTP/1.1" 200 13827
+INFO 2025-06-14 08:57:42,716 basehttp 21900 24520 "GET /admin/?id=915f5cd8-909a-4768-8f92-386049f8936c&vscodeBrowserReqId=1749916662696 HTTP/1.1" 302 0
+INFO 2025-06-14 08:57:42,741 basehttp 21900 24520 "GET /admin/login/?next=/admin/%3Fid%3D915f5cd8-909a-4768-8f92-386049f8936c%26vscodeBrowserReqId%3D1749916662696 HTTP/1.1" 200 13827
+INFO 2025-06-14 08:57:43,264 basehttp 21900 24520 "GET /admin/?id=915f5cd8-909a-4768-8f92-386049f8936c&vscodeBrowserReqId=1749916663244 HTTP/1.1" 302 0
+INFO 2025-06-14 08:57:43,284 basehttp 21900 24520 "GET /admin/login/?next=/admin/%3Fid%3D915f5cd8-909a-4768-8f92-386049f8936c%26vscodeBrowserReqId%3D1749916663244 HTTP/1.1" 200 13827
+INFO 2025-06-14 08:57:45,134 basehttp 21900 24520 "GET /api/docs/?id=915f5cd8-909a-4768-8f92-386049f8936c&vscodeBrowserReqId=1749916664789 HTTP/1.1" 200 13878
+INFO 2025-06-14 08:57:48,596 basehttp 21900 8412 "GET /api/docs/ HTTP/1.1" 200 14237
+ERROR 2025-06-14 08:57:49,081 log 21900 8412 Internal Server Error: /api/schema/
+ERROR 2025-06-14 08:57:49,081 basehttp 21900 8412 "GET /api/schema/ HTTP/1.1" 500 6235
+ERROR 2025-06-14 08:57:49,179 log 21900 8412 Internal Server Error: /api/schema/
+ERROR 2025-06-14 08:57:49,179 basehttp 21900 8412 "GET /api/schema/ HTTP/1.1" 500 6235
+INFO 2025-06-14 08:57:49,398 basehttp 21900 8412 "GET /__debug__/history_sidebar/?store_id=178ea63d9f3b427db108f620712a0150 HTTP/1.1" 200 9939
+ERROR 2025-06-14 08:57:54,941 log 21900 24520 Internal Server Error: /health/
+ERROR 2025-06-14 08:57:54,941 basehttp 21900 24520 "GET /health/?id=915f5cd8-909a-4768-8f92-386049f8936c&vscodeBrowserReqId=1749916674915 HTTP/1.1" 500 5052
+ERROR 2025-06-14 08:57:59,247 log 21900 8412 Internal Server Error: /health/
+ERROR 2025-06-14 08:57:59,247 basehttp 21900 8412 "GET /health/ HTTP/1.1" 500 5052
+WARNING 2025-06-14 09:01:21,877 log 6988 6796 Not Found: /
+WARNING 2025-06-14 09:01:21,877 basehttp 6988 6796 "GET / HTTP/1.1" 404 12751
+INFO 2025-06-14 09:01:25,862 basehttp 6988 6796 "GET /admin HTTP/1.1" 301 0
+INFO 2025-06-14 09:01:25,909 basehttp 6988 17156 "GET /admin/ HTTP/1.1" 200 10379
+INFO 2025-06-14 09:01:32,935 basehttp 6988 17156 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 14025
+INFO 2025-06-14 09:01:32,979 basehttp 6988 17156 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:01:32,982 basehttp 6988 17156 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:01:32,988 basehttp 6988 7872 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:01:32,988 basehttp 6988 2100 "GET /static/admin/css/login.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:01:32,989 basehttp 6988 11876 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:01:32,989 basehttp 6988 17156 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2025-06-14 09:01:32,990 basehttp 6988 2400 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-06-14 09:01:36,843 basehttp 6988 2400 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 14237
+ERROR 2025-06-14 09:08:14,797 log 6988 10156 Internal Server Error: /health/
+ERROR 2025-06-14 09:08:14,798 basehttp 6988 10156 "GET /health/ HTTP/1.1" 500 5052
+ERROR 2025-06-14 09:08:14,818 log 6988 10156 Internal Server Error: /health/ping/
+ERROR 2025-06-14 09:08:14,819 basehttp 6988 10156 "GET /health/ping/ HTTP/1.1" 500 5057
+ERROR 2025-06-14 09:08:14,843 log 6988 10156 Internal Server Error: /health/status/
+ERROR 2025-06-14 09:08:14,843 basehttp 6988 10156 "GET /health/status/ HTTP/1.1" 500 5059
+ERROR 2025-06-14 09:08:14,866 log 6988 10156 Internal Server Error: /health/live/
+ERROR 2025-06-14 09:08:14,867 basehttp 6988 10156 "GET /health/live/ HTTP/1.1" 500 5057
+ERROR 2025-06-14 09:08:14,888 log 6988 10156 Internal Server Error: /health/ready/
+ERROR 2025-06-14 09:08:14,888 basehttp 6988 10156 "GET /health/ready/ HTTP/1.1" 500 5058
+INFO 2025-06-14 09:08:14,907 basehttp 6988 10156 "GET /health/simple/ HTTP/1.1" 200 59
+ERROR 2025-06-14 09:08:14,929 log 6988 10156 Internal Server Error: /health/detailed/
+ERROR 2025-06-14 09:08:14,930 basehttp 6988 10156 "GET /health/detailed/ HTTP/1.1" 500 5061
+ERROR 2025-06-14 09:08:15,023 log 6988 10156 Internal Server Error: /api/schema/
+ERROR 2025-06-14 09:08:15,024 basehttp 6988 10156 "GET /api/schema/ HTTP/1.1" 500 6235
+INFO 2025-06-14 09:08:15,055 basehttp 6988 10156 "GET /api/docs/ HTTP/1.1" 200 13800
+INFO 2025-06-14 09:08:15,120 basehttp 6988 10156 "GET /api/redoc/ HTTP/1.1" 200 10070
+INFO 2025-06-14 09:08:15,140 basehttp 6988 10156 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-06-14 09:08:15,167 basehttp 6988 10156 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 13588
+ERROR 2025-06-14 09:08:15,198 log 6988 10156 Internal Server Error: /api/v1/api/v1/auth/login/
+ERROR 2025-06-14 09:08:15,198 basehttp 6988 10156 "GET /api/v1/api/v1/auth/login/ HTTP/1.1" 500 4675
+ERROR 2025-06-14 09:08:15,220 log 6988 10156 Internal Server Error: /api/v1/api/v1/auth/register/
+ERROR 2025-06-14 09:08:15,221 basehttp 6988 10156 "GET /api/v1/api/v1/auth/register/ HTTP/1.1" 500 4678
+INFO 2025-06-14 09:08:15,244 basehttp 6988 10156 "GET /api/v1/api/v1/auth/health/ HTTP/1.1" 200 82
+ERROR 2025-06-14 09:08:15,268 log 6988 10156 Internal Server Error: /api/v1/api/v1/vehicles/
+ERROR 2025-06-14 09:08:15,269 basehttp 6988 10156 "GET /api/v1/api/v1/vehicles/ HTTP/1.1" 500 1383
+ERROR 2025-06-14 09:08:15,290 log 6988 10156 Internal Server Error: /api/v1/api/v1/vehicles/statistics/
+ERROR 2025-06-14 09:08:15,290 basehttp 6988 10156 "GET /api/v1/api/v1/vehicles/statistics/ HTTP/1.1" 500 1394
+INFO 2025-06-14 09:10:38,594 basehttp 6988 18000 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 13584
+INFO 2025-06-14 09:10:38,643 basehttp 6988 18000 "GET /static/admin/css/base.css HTTP/1.1" 200 21207
+INFO 2025-06-14 09:10:38,661 basehttp 6988 12408 "GET /static/admin/css/login.css HTTP/1.1" 200 958
+INFO 2025-06-14 09:10:38,662 basehttp 6988 11508 "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 12621
+INFO 2025-06-14 09:10:38,663 basehttp 6988 11060 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2694
+INFO 2025-06-14 09:10:38,664 basehttp 6988 18000 "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 13404
+INFO 2025-06-14 09:10:38,664 basehttp 6988 23764 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2929
+INFO 2025-06-14 09:10:38,665 basehttp 6988 24228 "GET /static/admin/css/responsive.css HTTP/1.1" 200 18533
+INFO 2025-06-14 09:10:38,677 basehttp 6988 18000 "GET /static/admin/js/theme.js HTTP/1.1" 200 1943
+INFO 2025-06-14 09:10:38,677 basehttp 6988 24228 "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-06-14 09:10:38,677 basehttp 6988 23764 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-06-14 09:10:38,683 basehttp 6988 8592 "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 13404
+INFO 2025-06-14 09:10:38,731 basehttp 6988 18000 "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4527
+INFO 2025-06-14 09:10:38,762 basehttp 6988 8592 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-06-14 09:10:38,762 basehttp 6988 24668 "GET /static/admin/js/theme.js HTTP/1.1" 200 1943
+INFO 2025-06-14 09:10:38,796 basehttp 6988 24668 "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4527
+WARNING 2025-06-14 09:10:39,073 log 6988 18000 Not Found: /favicon.ico
+WARNING 2025-06-14 09:10:39,074 basehttp 6988 18000 "GET /favicon.ico HTTP/1.1" 404 12375
+INFO 2025-06-14 09:16:30,516 basehttp 6988 11828 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 13799
+INFO 2025-06-14 09:16:30,552 basehttp 6988 11828 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:16:30,560 basehttp 6988 4116 "GET /static/admin/css/login.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:16:30,561 basehttp 6988 10416 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:16:30,561 basehttp 6988 2136 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:16:30,562 basehttp 6988 5772 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:16:30,562 basehttp 6988 11828 "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 304 0
+INFO 2025-06-14 09:16:30,564 basehttp 6988 1060 "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:16:30,585 basehttp 6988 1060 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-06-14 09:16:30,588 basehttp 6988 1060 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2025-06-14 09:16:30,589 basehttp 6988 11828 "GET /static/debug_toolbar/css/print.css HTTP/1.1" 304 0
+INFO 2025-06-14 09:16:30,622 basehttp 6988 11828 "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 304 0
+INFO 2025-06-14 09:16:34,616 basehttp 6988 11828 "GET /__debug__/render_panel/?store_id=ee8cf2c451ce466da323e31dedfdfb0f&panel_id=SQLPanel HTTP/1.1" 200 20527
+INFO 2025-06-14 09:16:45,329 basehttp 6988 11828 "GET /__debug__/render_panel/?store_id=ee8cf2c451ce466da323e31dedfdfb0f&panel_id=StaticFilesPanel HTTP/1.1" 200 49357
+INFO 2025-06-14 09:16:47,579 basehttp 6988 11828 "GET /__debug__/render_panel/?store_id=ee8cf2c451ce466da323e31dedfdfb0f&panel_id=SignalsPanel HTTP/1.1" 200 2528
+INFO 2025-06-14 09:16:53,023 basehttp 6988 11828 "GET /__debug__/render_panel/?store_id=ee8cf2c451ce466da323e31dedfdfb0f&panel_id=RequestPanel HTTP/1.1" 200 2206
+INFO 2025-06-14 09:18:13,143 autoreload 4740 6140 Watching for file changes with StatReloader
+INFO 2025-06-14 09:18:22,940 basehttp 6988 11828 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 13799
+INFO 2025-06-14 09:18:23,028 basehttp 6988 11828 "GET /static/admin/css/base.css HTTP/1.1" 200 21207
+INFO 2025-06-14 09:18:23,036 basehttp 6988 2136 "GET /static/admin/css/login.css HTTP/1.1" 200 958
+INFO 2025-06-14 09:18:23,036 basehttp 6988 1060 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2929
+INFO 2025-06-14 09:18:23,036 basehttp 6988 5772 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2694
+INFO 2025-06-14 09:18:23,037 basehttp 6988 4116 "GET /static/admin/css/responsive.css HTTP/1.1" 200 18533
+INFO 2025-06-14 09:18:23,038 basehttp 6988 10416 "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 12621
+INFO 2025-06-14 09:18:23,040 basehttp 6988 11828 "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 13404
+INFO 2025-06-14 09:18:23,045 basehttp 6988 2136 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-06-14 09:18:23,046 basehttp 6988 4116 "GET /static/admin/js/theme.js HTTP/1.1" 200 1943
+INFO 2025-06-14 09:18:23,046 basehttp 6988 1060 "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-06-14 09:18:23,054 basehttp 6988 4116 "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4527
+WARNING 2025-06-14 09:18:23,190 log 6988 4116 Not Found: /favicon.ico
+WARNING 2025-06-14 09:18:23,191 basehttp 6988 4116 "GET /favicon.ico HTTP/1.1" 404 12375
+INFO 2025-06-14 09:18:25,296 basehttp 6988 4116 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 13799
+INFO 2025-06-14 09:18:25,401 basehttp 6988 300 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-06-14 09:18:25,402 basehttp 6988 24784 "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 304 0
+INFO 2025-06-14 09:18:25,402 basehttp 6988 22596 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2025-06-14 09:18:25,404 basehttp 6988 1832 "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 304 0
+INFO 2025-06-14 09:18:37,093 basehttp 4740 10348 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 13800
+INFO 2025-06-14 09:18:37,128 basehttp 4740 10348 "GET /static/admin/css/base.css HTTP/1.1" 200 21207
+INFO 2025-06-14 09:18:37,138 basehttp 4740 25476 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2929
+INFO 2025-06-14 09:18:37,140 basehttp 4740 23768 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2694
+INFO 2025-06-14 09:18:37,140 basehttp 4740 308 "GET /static/admin/css/login.css HTTP/1.1" 200 958
+INFO 2025-06-14 09:18:37,141 basehttp 4740 10348 "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 13404
+INFO 2025-06-14 09:18:37,142 basehttp 4740 10408 "GET /static/admin/css/responsive.css HTTP/1.1" 200 18533
+INFO 2025-06-14 09:18:37,143 basehttp 4740 916 "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 12621
+INFO 2025-06-14 09:18:37,156 basehttp 4740 916 "GET /static/admin/js/theme.js HTTP/1.1" 200 1943
+INFO 2025-06-14 09:18:37,158 basehttp 4740 10408 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-06-14 09:18:37,158 basehttp 4740 10348 "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-06-14 09:18:37,191 basehttp 4740 10348 "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4527
+WARNING 2025-06-14 09:18:37,333 log 4740 10348 Not Found: /favicon.ico
+WARNING 2025-06-14 09:18:37,334 basehttp 4740 10348 "GET /favicon.ico HTTP/1.1" 404 12375
+INFO 2025-06-14 09:18:39,260 basehttp 4740 10348 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 13799
+WARNING 2025-06-14 09:28:49,445 signals 4108 22892 No se pudieron importar modelos de subastas para las señales
+WARNING 2025-06-14 09:28:49,445 signals 4108 22892 No se pudieron importar modelos de vehículos para las señales
+WARNING 2025-06-14 09:28:58,365 signals 11508 8212 No se pudieron importar modelos de subastas para las señales
+WARNING 2025-06-14 09:28:58,365 signals 11508 8212 No se pudieron importar modelos de vehículos para las señales
+WARNING 2025-06-14 09:29:07,640 signals 11040 24796 No se pudieron importar modelos de subastas para las señales
+WARNING 2025-06-14 09:29:07,641 signals 11040 24796 No se pudieron importar modelos de vehículos para las señales
+WARNING 2025-06-14 09:29:18,980 signals 9976 7456 No se pudieron importar modelos de subastas para las señales
+WARNING 2025-06-14 09:29:18,981 signals 9976 7456 No se pudieron importar modelos de vehículos para las señales
+WARNING 2025-06-14 09:30:15,182 signals 21960 11928 No se pudieron importar modelos de subastas para las señales
+WARNING 2025-06-14 09:30:15,183 signals 21960 11928 No se pudieron importar modelos de vehículos para las señales
+INFO 2025-06-14 09:30:16,215 signals 21960 11928 Nueva notificación creada: 3cf98d59-5bde-4d8e-a822-e4317a455ad9 para usuario admin@example.com
+ERROR 2025-06-14 09:30:20,309 signals 21960 11928 Error enviando evento de notificación en tiempo real: Error 22 connecting to localhost:6379. 22.
+ERROR 2025-06-14 09:30:24,454 signals 21960 11928 Error enviando actualización de contador: Error 22 connecting to localhost:6379. 22.
+INFO 2025-06-14 09:30:24,497 signals 21960 11928 Nueva notificación creada: 70baba36-625c-43df-9a84-713929356630 para usuario admin@example.com
+ERROR 2025-06-14 09:30:28,614 signals 21960 11928 Error enviando evento de notificación en tiempo real: Error 22 connecting to localhost:6379. 22.
+ERROR 2025-06-14 09:30:32,718 signals 21960 11928 Error enviando actualización de contador: Error 22 connecting to localhost:6379. 22.
+INFO 2025-06-14 09:30:32,761 signals 21960 11928 Nueva notificación creada: a04f2325-0dd8-4491-af81-447e7676dc08 para usuario admin@example.com
+ERROR 2025-06-14 09:30:36,861 signals 21960 11928 Error enviando evento de notificación en tiempo real: Error 22 connecting to localhost:6379. 22.
+ERROR 2025-06-14 09:30:40,946 signals 21960 11928 Error enviando actualización de contador: Error 22 connecting to localhost:6379. 22.
+WARNING 2025-06-14 09:35:20,810 signals 22888 10624 No se pudieron importar modelos de subastas para las señales
+WARNING 2025-06-14 09:35:20,810 signals 22888 10624 No se pudieron importar modelos de vehículos para las señales
+INFO 2025-06-14 09:35:21,400 signals 22888 10624 Nueva notificación creada: 6c24283e-e786-4f91-9b7b-a77d3454c01a para usuario admin@example.com
+ERROR 2025-06-14 09:35:25,505 signals 22888 10624 Error enviando evento de notificación en tiempo real: Error 22 connecting to localhost:6379. 22.
+ERROR 2025-06-14 09:35:29,583 signals 22888 10624 Error enviando actualización de contador: Error 22 connecting to localhost:6379. 22.
+ERROR 2025-06-14 09:35:33,678 services 22888 10624 Error enviando notificación en tiempo real: Error 22 connecting to localhost:6379. 22.
+INFO 2025-06-14 09:35:33,679 services 22888 10624 Notificación creada: 6c24283e-e786-4f91-9b7b-a77d3454c01a para usuario 3fcf5de5-b4fc-4a81-a5ab-626c9e283e06
+INFO 2025-06-14 09:35:33,722 signals 22888 10624 Nueva notificación creada: 57bdd13a-5932-4bc1-a83a-b0d29e8c16a8 para usuario admin@example.com
+ERROR 2025-06-14 09:35:37,801 signals 22888 10624 Error enviando evento de notificación en tiempo real: Error 22 connecting to localhost:6379. 22.
+ERROR 2025-06-14 09:35:41,904 signals 22888 10624 Error enviando actualización de contador: Error 22 connecting to localhost:6379. 22.
+ERROR 2025-06-14 09:35:45,985 services 22888 10624 Error enviando notificación en tiempo real: Error 22 connecting to localhost:6379. 22.
+INFO 2025-06-14 09:35:45,985 services 22888 10624 Notificación creada: 57bdd13a-5932-4bc1-a83a-b0d29e8c16a8 para usuario 3fcf5de5-b4fc-4a81-a5ab-626c9e283e06

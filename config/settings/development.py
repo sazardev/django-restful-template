@@ -19,7 +19,6 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Additional apps for development
 INSTALLED_APPS += [
-    'django_extensions',
     'debug_toolbar',
 ]
 

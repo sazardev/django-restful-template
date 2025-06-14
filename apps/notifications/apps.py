@@ -11,11 +11,11 @@ class NotificationsConfig(AppConfig):
     
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'apps.notifications'
-    verbose_name = 'Notifications'
-    
+    verbose_name = 'Notifications'    
     def ready(self):
         """Ejecutar cuando la app esté lista."""
         try:
             from . import signals
+            from .infrastructure import signals as infra_signals
         except ImportError:
             pass

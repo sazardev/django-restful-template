@@ -583,3 +583,6 @@ class VehicleAnalyticsService:
             utilization_rate=utilization_rate,
             maintenance_cost_trend=performance_metrics.get('maintenance_cost_trend', {})
         )
+
+# Compatibility alias
+VehicleApplicationService = VehicleService

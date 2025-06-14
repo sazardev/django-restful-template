@@ -208,3 +208,27 @@ class TimeBasedPermission(permissions.BasePermission):
             return self.start_hour <= current_hour <= self.end_hour
         else:  # Horario que cruza medianoche
             return current_hour >= self.start_hour or current_hour <= self.end_hour
+
+
+class IsOwnerOrReadOnlyPermission(permissions.BasePermission):
+    """
+    Permission that allows read-only access to any user,
+    but only allows owners to edit their objects.
+    """
+    
+    def has_permission(self, request, view):
+        """Check permissions at view level."""
+        return request.user and request.user.is_authenticated
+    
+    def has_object_permission(self, request, view, obj):
+        """Check permissions at object level."""
+        # Read permissions for any authenticated user
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        
+        # Write permissions only to the owner of the object
+        return obj.owner == request.user
+
+
+# Alias for compatibility  
+IsOwnerOrReadOnly = IsOwnerOrReadOnlyPermission
