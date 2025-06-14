@@ -1,0 +1,32 @@
+# Django 
+.env
+/venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+# Byte-compiled / optimized / DLL files
+*.pyc
+# C extensions
+*.so
+# Distribution / packaging
+.Python
+# Installer logs
+pip-log.txt
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+# Translations
+*.mo
+# Django stuff:
+#   static files
+staticfiles/
+#   media files
+media/
+# PyInstaller
+#  Usually contains a file named 'run' or 'run.exe'
+#  It is a good idea to use this if you are using PyInstaller
