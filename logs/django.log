@@ -2928,3 +2928,8 @@ WARNING 2025-06-14 17:10:38,243 signals 24 140433180334976 No se pudieron import
 WARNING 2025-06-14 17:10:38,244 signals 24 140433180334976 No se pudieron importar modelos de vehículos para las señales
 WARNING 2025-06-14 17:10:40,172 signals 27 139876123884416 No se pudieron importar modelos de subastas para las señales
 WARNING 2025-06-14 17:10:40,172 signals 27 139876123884416 No se pudieron importar modelos de vehículos para las señales
+WARNING 2025-06-14 17:10:42,025 signals 29 140030406056832 No se pudieron importar modelos de subastas para las señales
+WARNING 2025-06-14 17:10:42,025 signals 29 140030406056832 No se pudieron importar modelos de vehículos para las señales
+WARNING 2025-06-14 17:10:43,939 signals 1 140486403853184 No se pudieron importar modelos de subastas para las señales
+WARNING 2025-06-14 17:10:43,940 signals 1 140486403853184 No se pudieron importar modelos de vehículos para las señales
+WARNING 2025-06-14 17:10:44,179 log 1 140648480147136 Not Found: /ws-health/
