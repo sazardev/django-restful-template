@@ -1,7 +1,19 @@
 # Django 
 .env
 /venv/
-
+.logs
+*.log
+*.logs
+/logs
+/log
+/logs/nginx
+/logs/nginx/*
+/logs/postgres
+/logs/postgres/*
+/logs/celery
+/logs/celery/*
+/logs/redis
+/logs/redis/*
 # Python
 __pycache__/
 *.py[cod]
