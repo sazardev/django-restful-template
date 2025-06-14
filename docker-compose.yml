@@ -18,8 +18,6 @@
 # - Flower (Monitoreo de Celery)
 # ============================================================================
 
-version: "3.9"
-
 services:
   # ============================================================================
   # NGINX - Reverse Proxy & Static Files
@@ -61,56 +59,30 @@ services:
 
   # ============================================================================
   # DJANGO WEB - Main Application (HTTP + API)
-  # ============================================================================
-  web:
+  # ============================================================================  web:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: logistics_web
-    command: |
-      sh -c "
-        echo '🚀 Starting Django Web Application...'
-        
-        # Wait for database
-        echo '⏳ Waiting for database...'
-        python manage.py wait_for_db --timeout=60
-        
-        # Collect static files
-        echo '📁 Collecting static files...'
-        python manage.py collectstatic --noinput
-        
-        # Run migrations
-        echo '🔧 Running database migrations...'
-        python manage.py migrate --noinput
-        
-        # Load test data if requested
-        if [ \"$$LOAD_TEST_DATA\" = \"true\" ]; then
-          echo '📊 Loading test data...'
-          python manage.py setup_initial_data
-        else
-          echo '✨ Starting with clean database'
-        fi
-        
-        # Start Gunicorn
-        echo '🌟 Starting Gunicorn server...'
-        exec gunicorn config.wsgi:application \
-          --bind 0.0.0.0:8000 \
-          --workers 4 \
-          --worker-class gevent \
-          --worker-connections 1000 \
-          --max-requests 1000 \
-          --max-requests-jitter 50 \
+    command: >
+      gunicorn config.wsgi:application
+      --bind 0.0.0.0:8000
+      --workers 4
+      --worker-class gevent
+      --worker-connections 1000
+      --max-requests 1000
+      --max-requests-jitter 50
           --timeout 30 \
           --keep-alive 2 \
           --log-level info \
           --access-logfile /app/logs/gunicorn-access.log \
           --error-logfile /app/logs/gunicorn-error.log \
           --capture-output
-      "
-    volumes:
+      "    volumes:
       - static_volume:/app/staticfiles
       - media_volume:/app/media
-      - ./logs:/app/logs    environment:
+      - ./logs:/app/logs
+    environment:
       - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-config.settings.base}
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
@@ -134,27 +106,16 @@ services:
 
   # ============================================================================
   # DJANGO WEBSOCKET - Real-time Communications (ASGI)
-  # ============================================================================
-  websocket:
+  # ============================================================================  websocket:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: logistics_websocket
-    command: |
-      sh -c "
-        echo '🔌 Starting WebSocket server...'
-        
-        # Wait for database
-        echo '⏳ Waiting for database...'
-        python manage.py wait_for_db --timeout=60
-        
-        # Start Daphne ASGI server
-        echo '🌐 Starting Daphne ASGI server...'
-        exec daphne -b 0.0.0.0 -p 8001 \
-          --verbosity 2 \
-          --access-log /app/logs/daphne-access.log \
-          config.asgi:application
-      "
+    command: >
+      daphne -b 0.0.0.0 -p 8001
+      --verbosity 2
+      --access-log /app/logs/daphne-access.log
+      config.asgi:application
     volumes:
       - ./logs:/app/logs
     environment:
@@ -248,30 +209,19 @@ services:
 
   # ============================================================================
   # CELERY WORKER - Background Tasks
-  # ============================================================================
-  celery:
+  # ============================================================================  celery:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: logistics_celery
-    command: |
-      sh -c "
-        echo '⚙️  Starting Celery worker...'
-        
-        # Wait for database and redis
-        echo '⏳ Waiting for services...'
-        python manage.py wait_for_db --timeout=60
-        
-        # Start Celery worker
-        echo '🔄 Starting Celery worker...'
-        exec celery -A config worker \
-          --loglevel=info \
-          --concurrency=4 \
-          --prefetch-multiplier=1 \
-          --max-tasks-per-child=1000 \
-          --logfile=/app/logs/celery-worker.log \
-          --hostname=worker@%h
-      "
+    command: >
+      celery -A config worker
+      --loglevel=info
+      --concurrency=4
+      --prefetch-multiplier=1
+      --max-tasks-per-child=1000
+      --logfile=/app/logs/celery-worker.log
+      --hostname=worker@%h
     volumes:
       - ./logs:/app/logs
       - media_volume:/app/media
