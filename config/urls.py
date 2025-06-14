@@ -12,6 +12,10 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
+# Health check imports
+from apps.shared.views.health import health_check, health_check_detailed
+from apps.shared.views.websocket_health import websocket_health
+
 # API URLs
 api_v1_patterns = [
     # Authentication
@@ -32,6 +36,11 @@ urlpatterns = [
     # Admin panel
     path('admin/', admin.site.urls),
     
+    # Health checks
+    path('health/', health_check, name='health_check'),
+    path('api/health/', health_check_detailed, name='health_check_detailed'),
+    path('ws/health/', websocket_health, name='websocket_health'),
+    
     # API v1
     path('api/v1/', include(api_v1_patterns)),
     
@@ -39,9 +48,6 @@ urlpatterns = [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    
-    # Health check
-    path('health/', include('shared.infrastructure.health.urls')),
 ]
 
 # Serve media files in development

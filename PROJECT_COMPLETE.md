@@ -400,3 +400,108 @@ El sistema incluye soporte completo para WebSocket usando Django Channels:
 - **Subasta creada** → Notificación a usuarios interesados
 - **Nueva puja** → Notificación al pujador anterior
 - **Vehículo creado** → Notificación al propietario
+
+---
+
+## 🐳 **CONFIGURACIÓN DOCKER "TODO EN UNO" COMPLETADA**
+
+### ✅ **Nueva Implementación Docker Production-Ready**
+
+Se ha completado la configuración de un entorno Docker completamente funcional con un solo comando:
+
+#### 🚀 **Un Solo Comando para Todo**
+
+```bash
+# Con datos de prueba (recomendado para testing)
+./start.sh --with-test-data
+
+# Con base de datos limpia (para producción)
+./start.sh --clean
+
+# En Windows
+start.bat --with-test-data
+```
+
+#### 🏗️ **Servicios Incluidos**
+
+| Servicio          | Puerto | Descripción                         |
+| ----------------- | ------ | ----------------------------------- |
+| **Nginx**         | 80/443 | Reverse proxy + Static files        |
+| **Django**        | 8000   | API REST principal (Gunicorn)       |
+| **WebSocket**     | 8001   | Notificaciones tiempo real (Daphne) |
+| **PostgreSQL**    | 5432   | Base de datos principal             |
+| **Redis**         | 6379   | Cache + Message broker              |
+| **Celery Worker** | -      | Tareas asíncronas                   |
+| **Celery Beat**   | -      | Scheduler de tareas                 |
+| **Flower**        | 5555   | Monitoreo Celery (admin/flower123)  |
+
+#### 🎯 **Flag de Test Data**
+
+- `LOAD_TEST_DATA=true`: Carga automáticamente usuarios, vehículos, subastas de ejemplo
+- `LOAD_TEST_DATA=false`: Base de datos limpia para producción
+
+#### 🔧 **Herramientas de Gestión**
+
+```bash
+# Makefile commands
+make up-test         # Iniciar con datos de prueba
+make up-clean        # Iniciar limpio
+make down           # Parar servicios
+make logs           # Ver logs
+make shell          # Django shell
+make migrate        # Migraciones
+make test           # Tests
+make backup-db      # Backup BD
+```
+
+#### 🌐 **URLs Funcionales**
+
+Después de `./start.sh --with-test-data`:
+
+- **API Principal**: http://localhost
+- **Swagger Docs**: http://localhost/api/docs/
+- **Admin Django**: http://localhost/admin/
+- **Flower**: http://localhost:5555 (admin/flower123)
+- **Health Check**: http://localhost/health/
+
+#### 📋 **Archivos Docker Configurados**
+
+- `docker-compose.yml`: Configuración principal "todo en uno"
+- `nginx/nginx.conf`: Reverse proxy optimizado
+- `redis/redis.conf`: Cache configurado
+- `.env`: Variables de entorno con flag test
+- `start.sh`/`start.bat`: Scripts multiplataforma
+- `Makefile`: Comandos de desarrollo
+
+#### 🔒 **Production Ready Features**
+
+- Health checks automáticos
+- Rate limiting en Nginx
+- Headers de seguridad
+- Logging estructurado
+- Restart policies
+- Volume persistence
+- Network isolation
+- Resource limits
+
+#### 🎉 **Resultado Final**
+
+**Un comando y todo funciona:**
+
+```bash
+./start.sh --with-test-data
+```
+
+En menos de 5 minutos tienes:
+
+- ✅ Django + DRF funcionando
+- ✅ PostgreSQL configurado
+- ✅ Redis operativo
+- ✅ Celery procesando tareas
+- ✅ WebSocket para notificaciones
+- ✅ Nginx sirviendo contenido
+- ✅ Datos de prueba cargados
+- ✅ Monitoreo con Flower
+- ✅ Documentación accesible
+
+**¡Template listo para desarrollo y producción!** 🚀

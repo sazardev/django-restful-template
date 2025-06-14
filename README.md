@@ -7,6 +7,45 @@
 
 > **Plantilla profesional de Django** enfocada en enseñar y ejemplificar una **RESTful API avanzada** usando Django y Django REST Framework (DRF), con **arquitectura de código limpio**, inyección de dependencias, mejores estándares y documentación completa.
 
+## ⚡ Quick Start - Un Solo Comando
+
+### 🐳 Docker "Todo en Uno" (Recomendado)
+
+```bash
+# 1. Clona el repositorio
+git clone <repository-url>
+cd django-restful-template
+
+# 2. Inicia con datos de prueba (recomendado para testing)
+./start.sh --with-test-data
+
+# O inicia con base de datos limpia
+./start.sh --clean
+
+# En Windows
+start.bat --with-test-data
+```
+
+**¡Eso es todo!** 🎉 En pocos minutos tendrás:
+
+- 🌐 **API completa**: http://localhost
+- 📊 **Monitoreo Celery**: http://localhost:5555 (admin/flower123)
+- 🐘 **PostgreSQL**: localhost:5432
+- 🔴 **Redis**: localhost:6379
+- 📚 **Swagger Docs**: http://localhost/api/docs/
+
+### 🏗️ Servicios Incluidos
+
+| Servicio       | Puerto | Descripción                   |
+| -------------- | ------ | ----------------------------- |
+| **Nginx**      | 80/443 | Reverse proxy + Static files  |
+| **Django**     | 8000   | API REST principal            |
+| **WebSocket**  | 8001   | Notificaciones en tiempo real |
+| **PostgreSQL** | 5432   | Base de datos principal       |
+| **Redis**      | 6379   | Cache + Message broker        |
+| **Celery**     | -      | Tareas asíncronas             |
+| **Flower**     | 5555   | Monitoreo de Celery           |
+
 ## 🎯 Características Principales
 
 ### ✅ **Arquitectura Limpia Implementada**
@@ -16,6 +55,14 @@
 - **Infrastructure Layer**: Implementaciones de bases de datos y servicios externos
 - **Presentation Layer**: APIs REST, serializers y views
 - **Shared Layer**: Código compartido y utilidades
+
+### 🔔 **Sistema de Notificaciones en Tiempo Real**
+
+- **WebSocket** con Django Channels
+- **Celery** para tareas asíncronas
+- **Redis** como message broker
+- Notificaciones push y por email
+- Dashboard de administración
 
 ### 🔐 **Sistema de Autenticación Avanzado**
 
@@ -57,56 +104,125 @@
 - Error tracking con UUIDs
 - Métricas de performance
 
-## 🚀 Quick Start
+## 🚀 Opciones de Instalación
 
-### 1. **Clonar y Configurar**
+### Opción 1: Docker (Recomendado) 🐳
+
+El método más fácil es usar Docker. Todo está preconfigurado:
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/tu-usuario/django-restful-template.git
+# Clonar repositorio
+git clone <repository-url>
 cd django-restful-template
 
-# Crear entorno virtual
+# Iniciar con datos de prueba
+./start.sh --with-test-data     # Linux/Mac
+start.bat --with-test-data      # Windows
+
+# O iniciar con BD limpia
+./start.sh --clean
+```
+
+### Opción 2: Desarrollo Local 💻
+
+Si prefieres desarrollo local sin Docker:
+
+```bash
+# 1. Clonar y configurar entorno
+git clone <repository-url>
+cd django-restful-template
 python -m venv venv
-venv\Scripts\activate  # Windows
-# source venv/bin/activate  # Linux/Mac
-
-# Instalar dependencias
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
 pip install -r requirements.txt
-```
 
-### 2. **Configurar Variables de Entorno**
-
-```bash
-# Copiar template de variables
+# 2. Configurar variables de entorno
 cp .env.example .env
+# Editar .env con tu configuración
 
-# Editar .env con tus configuraciones
-# SECRET_KEY, DATABASE_URL, etc.
-```
+# 3. Configurar servicios externos
+# Instalar PostgreSQL y Redis localmente
+# O usar Docker solo para estos servicios:
+docker run -d --name postgres -p 5432:5432 -e POSTGRES_DB=logistics_db postgres:15
+docker run -d --name redis -p 6379:6379 redis:7-alpine
 
-### 3. **Inicializar Base de Datos**
-
-```bash
-# Ejecutar migraciones
+# 4. Inicializar BD
+python manage.py wait_for_db
 python manage.py migrate
+python manage.py setup_initial_data  # Datos de prueba
 
-# Crear datos iniciales y usuarios de prueba
-python manage.py setup_initial_data
+# 5. Ejecutar servicios
+# Terminal 1: Django
+python manage.py runserver
 
-# Crear superusuario (opcional)
-python manage.py createsuperuser
+# Terminal 2: Celery Worker
+celery -A config worker -l info
+
+# Terminal 3: Celery Beat
+celery -A config beat -l info
+
+# Terminal 4: WebSocket (opcional)
+daphne -p 8001 config.asgi:application
 ```
 
-### 4. **Ejecutar el Servidor**
+## 🔧 Comandos de Gestión
+
+### Scripts de Inicio Rápido
 
 ```bash
+# Datos de prueba vs limpio
+./start.sh --with-test-data    # Con usuarios, vehículos, subastas de ejemplo
+./start.sh --clean             # Solo estructura de BD
+
+# Opciones adicionales
+./start.sh --build             # Rebuild containers
+./start.sh --stop              # Parar todos los servicios
+./start.sh --logs              # Ver logs en tiempo real
+```
+
+### Comandos Docker
+
+```bash
+# Ver estado de servicios
+docker-compose ps
+
+# Ver logs específicos
+docker-compose logs web
+docker-compose logs celery
+docker-compose logs flower
+
+# Ejecutar comandos Django
+docker-compose exec web python manage.py shell
+docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py test
+
+# Acceder a contenedor
+docker-compose exec web bash
+```
+
+### Desarrollo y Testing
+
+```bash
+# Ejecutar tests
+docker-compose exec web python manage.py test
+
+# Linter y formato
+docker-compose exec web flake8
+docker-compose exec web black .
+
+# Crear nueva app
+docker-compose exec web python manage.py startapp nueva_app
+```
+
 # Modo desarrollo
+
 python manage.py runserver
 
 # Verificar funcionamiento
+
 python demo_api.py
-```
+
+````
 
 ### 5. **Explorar la API**
 
@@ -127,7 +243,7 @@ docker-compose up -d
 
 # Ver logs
 docker-compose logs -f
-```
+````
 
 ## 👤 Usuarios de Prueba
 

@@ -1,0 +1,45 @@
+# ============================================================================
+# BACKUP SERVICE DOCKERFILE
+# ============================================================================
+# Contenedor dedicado para realizar backups automáticos
+
+FROM postgres:15-alpine
+
+# Install additional tools
+RUN apk add --no-cache \
+    curl \
+    gzip \
+    tar \
+    aws-cli \
+    python3 \
+    py3-pip \
+    supercronic
+
+# Install Python dependencies for backup scripts
+RUN pip3 install --no-cache-dir \
+    boto3 \
+    psycopg2-binary \
+    python-dotenv
+
+# Create backup user
+RUN addgroup -g 1000 backup && \
+    adduser -u 1000 -G backup -s /bin/sh -D backup
+
+# Create directories
+RUN mkdir -p /backups /scripts /logs && \
+    chown -R backup:backup /backups /scripts /logs
+
+# Copy backup scripts
+COPY scripts/backup/ /scripts/
+RUN chmod +x /scripts/*.sh && \
+    chown -R backup:backup /scripts
+
+# Switch to backup user
+USER backup
+
+# Health check
+HEALTHCHECK --interval=300s --timeout=30s --start-period=60s --retries=3 \
+    CMD [ -f /backups/last_backup.log ] || exit 1
+
+# Default command
+CMD ["/scripts/backup-cron.sh"]
